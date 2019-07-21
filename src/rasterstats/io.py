@@ -261,7 +261,7 @@ class Raster(object):
         col, row = [math.floor(a) for a in (~self.affine * (x, y))]
         return row, col
 
-    def read(self, bounds=None, window=None, masked=False):
+    def read(self, bounds=None, window=None, masked=False, out_dtype=None):
         """ Performs a boundless read against the underlying array source
 
         Parameters
@@ -306,7 +306,7 @@ class Raster(object):
         elif self.src:
             # It's an open rasterio dataset
             new_array = self.src.read(
-                self.band, window=win, boundless=True, masked=masked)
+                self.band, window=win, boundless=True, masked=masked, out_dtype=out_dtype)
 
         return Raster(new_array, new_affine, nodata)
 
