@@ -153,7 +153,8 @@ def gen_zonal_stats(
 
             geom_bounds = tuple(geom.bounds)
 
-            fsrc = rast.read(bounds=geom_bounds)
+            out_dtype = kwargs.get('out_dtype',None)
+            fsrc = rast.read(bounds=geom_bounds, out_dtype=out_dtype)
 
             # rasterized geometry
             rv_array = rasterize_geom(geom, like=fsrc, all_touched=all_touched)
